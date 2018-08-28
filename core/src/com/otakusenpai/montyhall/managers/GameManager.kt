@@ -22,11 +22,11 @@ open class GameManager {
     open var hasWon = false
     var temp = Vector3()
 
-    private val DOOR_RESIZE_FACTOR = 2500f
+    private val DOOR_RESIZE_FACTOR =333.5f
     private val DOOR_VERT_POSITION_FACTOR = 3f
-    private val DOOR1_HORIZ_POSITION_FACTOR = 7.77f
-    private val DOOR2_HORIZ_POSITION_FACTOR = 2.57f
-    private val DOOR3_HORIZ_POSITION_FACTOR = 1.52f
+    private val DOOR1_HORIZ_POSITION_FACTOR = 8.59f
+    private val DOOR2_HORIZ_POSITION_FACTOR = 2.61f
+    private val DOOR3_HORIZ_POSITION_FACTOR = 1.53f
     var width = 0.0f
     var height = 0.0f
 
@@ -35,6 +35,10 @@ open class GameManager {
     constructor(height: Float,width: Float,textManager: TextManager) {
         this.height = height
         this.width = width
+        println("The width is $width")
+        println("Current width = ${Gdx.graphics.width}")
+        println("The height is $height")
+        println("Current height = ${Gdx.graphics.height}")
         doorTexture = Texture(Gdx.files.internal("closed_door.png"))
         carTexture = Texture(Gdx.files.internal("door_with_a_car.png"))
         goatTexture = Texture(Gdx.files.internal("door_with_a_goat.png"))
@@ -69,9 +73,9 @@ open class GameManager {
 
         doorList.get(0).position.set(width/DOOR1_HORIZ_POSITION_FACTOR,
                 height/DOOR_VERT_POSITION_FACTOR)
-        doorList.get(0).position.set(width/DOOR2_HORIZ_POSITION_FACTOR,
+        doorList.get(1).position.set(width/DOOR2_HORIZ_POSITION_FACTOR,
                 height/DOOR_VERT_POSITION_FACTOR)
-        doorList.get(0).position.set(width/DOOR3_HORIZ_POSITION_FACTOR,
+        doorList.get(2).position.set(width/DOOR3_HORIZ_POSITION_FACTOR,
                 height/DOOR_VERT_POSITION_FACTOR)
 
         for(door in doorList) {
@@ -91,23 +95,23 @@ open class GameManager {
             doorList.get(0).openSprite.setRegion(carTexture)
             doorList.get(0).isGoat = false
             doorList.get(1).openSprite.setRegion(goatTexture)
-            doorList.get(0).isGoat = true
+            doorList.get(1).isGoat = true
             doorList.get(2).openSprite.setRegion(goatTexture)
-            doorList.get(0).isGoat = true
+            doorList.get(2).isGoat = true
         } else if(m == 1) {
             doorList.get(0).openSprite.setRegion(goatTexture)
             doorList.get(0).isGoat = true
             doorList.get(1).openSprite.setRegion(carTexture)
-            doorList.get(0).isGoat = false
+            doorList.get(1).isGoat = false
             doorList.get(2).openSprite.setRegion(goatTexture)
-            doorList.get(0).isGoat = true
+            doorList.get(2).isGoat = true
         } else if(m == 2) {
             doorList.get(0).openSprite.setRegion(goatTexture)
             doorList.get(0).isGoat = true
             doorList.get(1).openSprite.setRegion(goatTexture)
-            doorList.get(0).isGoat = true
+            doorList.get(1).isGoat = true
             doorList.get(2).openSprite.setRegion(carTexture)
-            doorList.get(0).isGoat = false
+            doorList.get(2).isGoat = false
         }
     }
 }

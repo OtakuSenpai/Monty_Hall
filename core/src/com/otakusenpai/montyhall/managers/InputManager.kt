@@ -10,6 +10,7 @@ open class InputManager(gameManager: GameManager) {
 
     open fun handleInput(camera: OrthographicCamera) {
         if(Gdx.input.justTouched()) {
+            println("Check1 in handleInput")
             gameManager.temp.set(Gdx.input.getX().toFloat(),Gdx.input.getY().toFloat(),0f)
             camera.unproject(gameManager.temp)
 
@@ -18,7 +19,9 @@ open class InputManager(gameManager: GameManager) {
 
             for(door in gameManager.doorList) {
                 if(!door.isOpen) {
+                    println("Check2 in handleInput...")
                     if(handleDoor(door,touchX,touchY)) {
+                        println("positive")
                         break
                     }
                 }
@@ -29,10 +32,16 @@ open class InputManager(gameManager: GameManager) {
     open fun handleDoor(door: DoorClass,touchX: Float, touchY: Float): Boolean {
         var found = false
 
+        println("TouchX is $touchX")
+        println("TouchY is $touchY")
+        println("Door's width is ${door.width}")
+        println("Door's height is ${door.height}")
+
         if((touchX >= door.position.x && touchX <= (door.position.x + door.width)) &&
                 (touchY >= door.position.y && touchY <= (door.position.y + door.height))) {
             door.isOpen = true
             found = true
+            println("Found")
         }
 
         when(gameManager.state) {
